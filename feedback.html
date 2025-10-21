@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Feedback — Car Fault</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+/* Shared styles */
+:root{
+  --primary: #C21888;
+  --secondary: #6A1B9A;
+  --bg-grad-start: #1B0034;
+  --bg-grad-end: #43004C;
+  --accent: #FF4FA6;
+  --text-light: #F8F9FA;
+}
+html,body{height:100%;}
+body{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--text-light);
+  background: linear-gradient(135deg,var(--bg-grad-start) 0%, var(--bg-grad-end) 100%);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+a { color: var(--text-light); }
+a.btn-primary{
+  background: linear-gradient(90deg,var(--primary), var(--accent));
+  border: none;
+  box-shadow: 0 6px 18px rgba(198,24,136,0.18);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+a.btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 10px 26px rgba(198,24,136,0.24); }
+.navbar { background: transparent; }
+.card { background: rgba(255,255,255,0.03); border: none; border-radius: 14px; }
+.hero-card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding: 2rem; border-radius: 18px; }
+.icon-circle { width:72px; height:72px; border-radius:14px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); display:flex; align-items:center; justify-content:center; font-size:28px; }
+.footer { color: rgba(248,249,250,0.7); font-size:14px; }
+.gradient-glow{ box-shadow: 0 8px 40px rgba(194,24,139,0.18); }
+/* Responsive tweaks */
+@media (max-width: 768px){
+  .hero-card{ padding: 1.25rem; }
+  .icon-circle{ width:56px; height:56px; font-size:22px; }
+}
+.container-lg { padding-top: 3.5rem; padding-bottom:3.5rem; }
+</style>
+    <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+  <body>
+    <nav class="navbar navbar-expand-lg py-3">
+      <div class="container-lg">
+        <a class="navbar-brand fw-bold" href="index.html">Car Fault</a>
+        <div class="ms-auto"><a class="btn btn-primary" href="index.html">Home</a></div>
+      </div>
+    </nav>
+
+    <main class="container-lg">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card p-4 mt-4">
+            <h3 class="mb-3">Send us feedback</h3>
+            <p class="small text-muted">We appreciate your thoughts — report bugs, suggestions, or general feedback.</p>
+            <form onsubmit="return submitFeedback(this);">
+              <div class="mb-3">
+                <label class="form-label">Name (optional)</label>
+                <input class="form-control" name="name" placeholder="Your name">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email (optional)</label>
+                <input class="form-control" name="email" placeholder="you@example.com" type="email">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Message</label>
+                <textarea class="form-control" name="message" rows="6" required></textarea>
+              </div>
+              <div class="d-flex justify-content-end">
+                <button class="btn btn-primary" type="submit">Send Feedback</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <footer class="mt-5 footer text-center">
+        <p class="mb-1">© 2025 Car Fault — OPERATOR_NAME, OPERATOR_COUNTRY</p>
+      </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+// Shared JS utilities
+(function(){
+  // Simple mobile detection
+  function isMobile(){
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    return /android|iphone|ipad|ipod|windows phone/i.test(ua);
+  }
+
+  // App store visibility toggles
+  window.CFConfig = {
+    showPlayStoreUI: false, // set to true when Play Store build is live
+    appStoreUrl: "#", // placeholder - replace with App Store link
+    playStoreUrl: "#"  // placeholder - replace with Play Store link
+  };
+
+  // Install prompt modal for mobile users
+  document.addEventListener('DOMContentLoaded', function(){
+    try{
+      if(isMobile()){
+        var showModal = true;
+        // Rough detection for "app installed" state (not foolproof), customize later for deep linking
+        if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+          showModal = false;
+        }
+        if(showModal){
+          var el = document.getElementById('cf-install-modal');
+          if(el) new bootstrap.Modal(el).show();
+        }
+      }
+    }catch(e){ console.warn(e); }
+  });
+
+  // Feedback form handler (client-side only)
+  window.submitFeedback = function(form){
+    form.querySelector('button[type=submit]').disabled = true;
+    var name = form.name.value||'Anonymous';
+    var email = form.email.value||'';
+    var message = form.message.value||'';
+    // Simulate async submission
+    setTimeout(function(){
+      alert('Thanks, ' + name + '! Your feedback has been received.');
+      form.reset();
+      form.querySelector('button[type=submit]').disabled = false;
+      // Optionally: send to backend or open mailto with encoded content for now
+    }, 600);
+    return false;
+  };
+})();
+</script>
+    <script src="firebase-feedback.js"></script>
+  <script>
+  document.getElementById("feedback-form").addEventListener("submit", submitFeedback);
+  </script>
+</body>
+</html>

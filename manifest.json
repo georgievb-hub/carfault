@@ -1,0 +1,17 @@
+
+{
+  "name": "Car Fault",
+  "short_name": "CarFault",
+  "description": "Identify car problems and dashboard warning lights.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#1B0034",
+  "theme_color": "#C21888",
+  "icons": [
+    {
+      "src": "CarFault.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

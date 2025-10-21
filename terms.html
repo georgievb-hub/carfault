@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Terms & Conditions — Car Fault</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+/* Shared styles */
+:root{
+  --primary: #C21888;
+  --secondary: #6A1B9A;
+  --bg-grad-start: #1B0034;
+  --bg-grad-end: #43004C;
+  --accent: #FF4FA6;
+  --text-light: #F8F9FA;
+}
+html,body{height:100%;}
+body{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--text-light);
+  background: linear-gradient(135deg,var(--bg-grad-start) 0%, var(--bg-grad-end) 100%);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+a { color: var(--text-light); }
+a.btn-primary{
+  background: linear-gradient(90deg,var(--primary), var(--accent));
+  border: none;
+  box-shadow: 0 6px 18px rgba(198,24,136,0.18);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+a.btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 10px 26px rgba(198,24,136,0.24); }
+.navbar { background: transparent; }
+.card { background: rgba(255,255,255,0.03); border: none; border-radius: 14px; }
+.hero-card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding: 2rem; border-radius: 18px; }
+.icon-circle { width:72px; height:72px; border-radius:14px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); display:flex; align-items:center; justify-content:center; font-size:28px; }
+.footer { color: rgba(248,249,250,0.7); font-size:14px; }
+.gradient-glow{ box-shadow: 0 8px 40px rgba(194,24,139,0.18); }
+/* Responsive tweaks */
+@media (max-width: 768px){
+  .hero-card{ padding: 1.25rem; }
+  .icon-circle{ width:56px; height:56px; font-size:22px; }
+}
+.container-lg { padding-top: 3.5rem; padding-bottom:3.5rem; }
+</style>
+    <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+  <body>
+    <nav class="navbar navbar-expand-lg py-3">
+      <div class="container-lg">
+        <a class="navbar-brand fw-bold" href="index.html">Car Fault</a>
+        <div class="ms-auto"><a class="btn btn-primary" href="index.html">Home</a></div>
+      </div>
+    </nav>
+
+    <main class="container-lg">
+      <article class="card p-4 mt-4">
+        <h1>Terms & Conditions</h1>
+        <p>Last updated: 2025-10-21</p>
+
+        <h4>1. Introduction</h4>
+        <p>These Terms and Conditions govern your use of the Car Fault mobile application (the "App"). The App is provided by OPERATOR_NAME based in OPERATOR_COUNTRY. By using the App or the associated website you agree to these terms.</p>
+
+        <h4>2. Use of the App</h4>
+        <p>The App provides informational diagnostics based on images and user-provided descriptions of vehicle warnings and behaviors. The App's outputs are for informational purposes only. They are not a substitute for professional diagnosis or repair by a qualified mechanic.</p>
+
+        <h4>3. No Warranty</h4>
+        <p>The App is provided "as is" without warranties of any kind. While we strive for accuracy, we do not guarantee that the diagnostic suggestions are correct or complete.</p>
+
+        <h4>4. Limitation of Liability</h4>
+        <p>To the maximum extent permitted by applicable law, OPERATOR_NAME and its affiliates are not liable for any direct, indirect, incidental, consequential, or punitive damages arising from your use of the App.</p>
+
+        <h4>5. Subscriptions & Payments</h4>
+        <p>If the App provides subscription-based or paid features, those will be described in-app. Refunds and billing are handled through the respective app store's policies.</p>
+
+        <h4>6. Intellectual Property</h4>
+        <p>All content, graphics, and trademarks in the App are owned by OPERATOR_NAME unless otherwise stated.</p>
+
+        <h4>7. Privacy</h4>
+        <p>Use of the App's data collection and analytics is described in our Privacy Policy. The App uses Firebase Analytics and may integrate with Facebook for marketing.</p>
+
+        <h4>8. Changes to Terms</h4>
+        <p>We may modify these Terms at any time. Continued use of the App after changes implies acceptance.</p>
+
+        <h4>9. Contact</h4>
+        <p>For questions about these Terms, contact: OPERATOR_NAME (replace with your name) — OPERATOR_COUNTRY.</p>
+      </article>
+
+      <footer class="mt-5 footer text-center">
+        <p class="mb-1">© 2025 Car Fault — OPERATOR_NAME, OPERATOR_COUNTRY</p>
+      </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+// Shared JS utilities
+(function(){
+  // Simple mobile detection
+  function isMobile(){
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    return /android|iphone|ipad|ipod|windows phone/i.test(ua);
+  }
+
+  // App store visibility toggles
+  window.CFConfig = {
+    showPlayStoreUI: false, // set to true when Play Store build is live
+    appStoreUrl: "#", // placeholder - replace with App Store link
+    playStoreUrl: "#"  // placeholder - replace with Play Store link
+  };
+
+  // Install prompt modal for mobile users
+  document.addEventListener('DOMContentLoaded', function(){
+    try{
+      if(isMobile()){
+        var showModal = true;
+        // Rough detection for "app installed" state (not foolproof), customize later for deep linking
+        if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+          showModal = false;
+        }
+        if(showModal){
+          var el = document.getElementById('cf-install-modal');
+          if(el) new bootstrap.Modal(el).show();
+        }
+      }
+    }catch(e){ console.warn(e); }
+  });
+
+  // Feedback form handler (client-side only)
+  window.submitFeedback = function(form){
+    form.querySelector('button[type=submit]').disabled = true;
+    var name = form.name.value||'Anonymous';
+    var email = form.email.value||'';
+    var message = form.message.value||'';
+    // Simulate async submission
+    setTimeout(function(){
+      alert('Thanks, ' + name + '! Your feedback has been received.');
+      form.reset();
+      form.querySelector('button[type=submit]').disabled = false;
+      // Optionally: send to backend or open mailto with encoded content for now
+    }, 600);
+    return false;
+  };
+})();
+</script>
+  </body>
+</html>
