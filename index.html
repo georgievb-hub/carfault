@@ -6,47 +6,8 @@
     <title>Car Fault — Identify dashboard warnings & fixes</title>
     <meta name="description" content="Upload a photo of your dashboard warning or describe the issue. Car Fault explains possible causes, severity, and recommended fixes." />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-/* Shared styles */
-:root{
-  --primary: #C21888;
-  --secondary: #6A1B9A;
-  --bg-grad-start: #1B0034;
-  --bg-grad-end: #43004C;
-  --accent: #FF4FA6;
-  --text-light: #F8F9FA;
-}
-html,body{height:100%;}
-body{
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  color:var(--text-light);
-  background: linear-gradient(135deg,var(--bg-grad-start) 0%, var(--bg-grad-end) 100%);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-a { color: var(--text-light); }
-a.btn-primary{
-  background: linear-gradient(90deg,var(--primary), var(--accent));
-  border: none;
-  box-shadow: 0 6px 18px rgba(198,24,136,0.18);
-  transition: transform .12s ease, box-shadow .12s ease;
-}
-a.btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 10px 26px rgba(198,24,136,0.24); }
-.navbar { background: transparent; }
-.card { background: rgba(255,255,255,0.03); border: none; border-radius: 14px; }
-.hero-card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding: 2rem; border-radius: 18px; }
-.icon-circle { width:72px; height:72px; border-radius:14px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); display:flex; align-items:center; justify-content:center; font-size:28px; }
-.footer { color: rgba(248,249,250,0.7); font-size:14px; }
-.gradient-glow{ box-shadow: 0 8px 40px rgba(194,24,139,0.18); }
-/* Responsive tweaks */
-@media (max-width: 768px){
-  .hero-card{ padding: 1.25rem; }
-  .icon-circle{ width:56px; height:56px; font-size:22px; }
-}
-.container-lg { padding-top: 3.5rem; padding-bottom:3.5rem; }
-</style>
     <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
   <body>
     <nav class="navbar navbar-expand-lg py-3">
@@ -104,7 +65,6 @@ a.btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 10px 26px rgba(1
         </div>
 
         <div class="col-lg-5 text-center">
-          <!-- Reference-styled artwork / mockup area -->
           <div class="card p-3">
             <div style="height:340px; display:flex; align-items:center; justify-content:center; border-radius:12px; overflow:hidden; position:relative;">
               <img src="appimage_edge.png" alt="Car Fault app reference" style="max-width:100%; height:100%; object-fit:cover; filter: saturate(1.05) contrast(.95);">
@@ -117,7 +77,6 @@ a.btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 10px 26px rgba(1
         </div>
       </div>
 
-      <!-- How It Works expanded -->
       <section class="mt-5">
         <div class="row g-4">
           <div class="col-md-4">
@@ -141,7 +100,6 @@ a.btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 10px 26px rgba(1
         </div>
       </section>
 
-      <!-- CTA -->
       <section class="mt-5 text-center">
         <div class="card p-4 d-inline-block">
           <h5 class="mb-2">Ready to diagnose your car?</h5>
@@ -150,79 +108,12 @@ a.btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 10px 26px rgba(1
       </section>
 
       <footer class="mt-5 footer text-center">
-        <p class="mb-1">© 2025 Car Fault — OPERATOR_NAME, OPERATOR_COUNTRY</p>
+        <p class="mb-1">© 2025 Car Fault Developers</p>
         <p class="mb-0"><a href="terms.html">Terms & Conditions</a> • <a href="privacy.html">Privacy Policy</a></p>
       </footer>
     </main>
 
-    <!-- Install modal (mobile) -->
-    <div class="modal fade" id="cf-install-modal" tabindex="-1" aria-labelledby="cfInstallLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="background:linear-gradient(180deg, rgba(27,0,52,0.9), rgba(67,0,76,0.9)); color:var(--text-light); border:none;">
-          <div class="modal-body text-center p-4">
-            <h5 id="cfInstallLabel" class="fw-bold">Install Car Fault</h5>
-            <p class="small">Get fast explanations for dashboard warnings. Install the app from the App Store.</p>
-            <div class="d-flex justify-content-center gap-2 mt-3">
-              <a class="btn btn-primary" href="#" role="button">App Store</a>
-              <!-- Play Store button is ready in code but hidden by default -->
-              <a id="cf-playstore-btn" class="btn btn-outline-light" href="#" role="button" style="display:none;">Google Play</a>
-            </div>
-            <div class="mt-3"><button class="btn btn-link text-decoration-none" data-bs-dismiss="modal">Maybe later</button></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-// Shared JS utilities
-(function(){
-  // Simple mobile detection
-  function isMobile(){
-    const ua = navigator.userAgent || navigator.vendor || window.opera;
-    return /android|iphone|ipad|ipod|windows phone/i.test(ua);
-  }
-
-  // App store visibility toggles
-  window.CFConfig = {
-    showPlayStoreUI: false, // set to true when Play Store build is live
-    appStoreUrl: "#", // placeholder - replace with App Store link
-    playStoreUrl: "#"  // placeholder - replace with Play Store link
-  };
-
-  // Install prompt modal for mobile users
-  document.addEventListener('DOMContentLoaded', function(){
-    try{
-      if(isMobile()){
-        var showModal = true;
-        // Rough detection for "app installed" state (not foolproof), customize later for deep linking
-        if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
-          showModal = false;
-        }
-        if(showModal){
-          var el = document.getElementById('cf-install-modal');
-          if(el) new bootstrap.Modal(el).show();
-        }
-      }
-    }catch(e){ console.warn(e); }
-  });
-
-  // Feedback form handler (client-side only)
-  window.submitFeedback = function(form){
-    form.querySelector('button[type=submit]').disabled = true;
-    var name = form.name.value||'Anonymous';
-    var email = form.email.value||'';
-    var message = form.message.value||'';
-    // Simulate async submission
-    setTimeout(function(){
-      alert('Thanks, ' + name + '! Your feedback has been received.');
-      form.reset();
-      form.querySelector('button[type=submit]').disabled = false;
-      // Optionally: send to backend or open mailto with encoded content for now
-    }, 600);
-    return false;
-  };
-})();
-</script>
+    <script src="main.js"></script>
   </body>
 </html>
