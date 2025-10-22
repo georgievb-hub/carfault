@@ -9,7 +9,7 @@
   "theme_color": "#C21888",
   "icons": [
     {
-      "src": "CarFault.png",
+      "src": "appimage_edge.png",
       "sizes": "512x512",
       "type": "image/png"
     }
