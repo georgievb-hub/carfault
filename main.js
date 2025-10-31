@@ -32,34 +32,4 @@
       }
     }
   });
-
-  // ---------- Feedback form handler ----------
-  window.submitFeedback = async function(event){
-    if(event.preventDefault) event.preventDefault();
-    const form = event.target.closest('form') || document.getElementById('feedback-form');
-    if(!form) return;
-    
-    const btn = form.querySelector('button[type=submit]');
-    if(btn) btn.disabled = true;
-
-    const name = document.getElementById('name')?.value || 'Anonymous';
-    const email = document.getElementById('email')?.value || '';
-    const message = document.getElementById('message')?.value || '';
-
-    try {
-      await fetch('https://your-firebase-function-endpoint/submitFeedback', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ name, email, message })
-      });
-      alert('Thanks, ' + name + '! Your feedback has been received.');
-      form.reset();
-    } catch(e) {
-      console.error('Submission failed:', e);
-      alert('Failed to send feedback. Please try again later.');
-    } finally {
-      if(btn) btn.disabled = false;
-    }
-    return false;
-  };
 })();
